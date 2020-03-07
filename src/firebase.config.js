@@ -11,9 +11,7 @@ const config = {
   measurementId: "G-Y7B4SSRZKN"
 };
 firebase.initializeApp(config);
-firebase.firestore().settings({
-  timestampsInSnapshots: true
-});
+firebase.firestore();
 
 export const appFirebase = firebase;
 export const appFirestore = firebase.firestore();
