@@ -1,14 +1,17 @@
-import React from 'react';
-import { Link } from 'react-router-dom'
-import './App.scss';
+import React from "react";
+import { Link, BrowserRouter as Router } from "react-router-dom";
+import { routes as RouterView } from "./routes";
 
 function App() {
   return (
     <div className="App">
-      <header className="App-header">
+      <Router>
+        <Link to="/">Log In</Link>
+        <Link to="/main">Main</Link>
+        <Link to="/profile">Profile</Link>
 
-        <Link to="/users">Users</Link>
-      </header>
+        <RouterView />
+      </Router>
     </div>
   );
 }

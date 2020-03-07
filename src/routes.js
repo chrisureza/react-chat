@@ -1,14 +1,49 @@
-import React from 'react';
-import { Route, BrowserRouter as Router } from 'react-router-dom'
+import React from "react";
+import { Route, Switch } from "react-router-dom";
+import { ToastContainer, toast } from "react-toastify";
 
-import App from './App';
-import Users from './views/Users'
+import Login from "./views/Login/Login";
+import Main from "./views/Main/Main";
+import Profile from "./views/Profile/Profile";
 
-export default (
-  <Router>
+export const routes = () => {
+  const showToast = (type, message) => {
+    switch (type) {
+      case "warning":
+        toast.warning(message);
+        break;
+      case "success":
+        toast.success(message);
+        break;
+      default:
+        break;
+    }
+  };
+
+  return (
     <div>
-      <Route path="/" component={App} />
-      <Route path="/users" component={Users} />
+      <ToastContainer
+        autoClose={2000}
+        hideProgressBar={true}
+        position={toast.POSITION.BOTTOM_RIGHT}
+      />
+      <Switch>
+        <Route
+          exact
+          path="/"
+          render={props => <Login showToast={showToast} {...props} />}
+        />
+        <Route
+          exact
+          path="/main"
+          render={props => <Main showToast={showToast} {...props} />}
+        />
+        <Route
+          exact
+          path="/profile"
+          render={props => <Profile showToast={showToast} {...props} />}
+        />
+      </Switch>
     </div>
-  </Router>
-)
+  );
+};
