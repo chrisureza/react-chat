@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import ReactLoading from "react-loading";
 import { withRouter } from "react-router-dom";
 import { appFirebase, appFirestore } from "../../firebase.config";
@@ -12,6 +12,7 @@ const Main = props => {
   const [isLoading, setIsLoading] = useState(true);
   const [isLogoutDialogOpen, setIsLogoutDialogOpen] = useState(false);
   const [currentPeerUser, setCurrentPeerUser] = useState(null);
+  let listUser = useRef([]);;
 
   useEffect(() => {
     checkLogin();
@@ -20,7 +21,6 @@ const Main = props => {
   const currentUserId = localStorage.getItem(constants.ID);
   const currentUserAvatar = localStorage.getItem(constants.PHOTO_URL);
   const currentUserNickname = localStorage.getItem(constants.NICKNAME);
-  let listUser = [];
 
   const checkLogin = () => {
     if (!localStorage.getItem(constants.ID)) {
@@ -34,7 +34,7 @@ const Main = props => {
   const getListUser = async () => {
     const result = await appFirestore.collection(constants.NODE_USERS).get();
     if (result.docs.length > 0) {
-      listUser = [...result.docs];
+      listUser.current = [...result.docs];
       setIsLoading(false);
     }
   };
@@ -54,7 +54,7 @@ const Main = props => {
         props.showToast(1, "Logout success");
         props.history.push("/");
       })
-      .catch(function(err) {
+      .catch(function (err) {
         setIsLoading(false);
         props.showToast(0, err.message);
       });
@@ -69,9 +69,9 @@ const Main = props => {
   };
 
   const renderListUser = () => {
-    if (listUser.length > 0) {
+    if (listUser.current.length > 0) {
       let viewListUser = [];
-      listUser.forEach((item, index) => {
+      listUser.current.forEach((item, index) => {
         if (item.data().id !== currentUserId) {
           viewListUser.push(
             <button
@@ -93,10 +93,10 @@ const Main = props => {
               <div className="viewWrapContentItem">
                 <span className="textItem">{`Nickname: ${
                   item.data().nickname
-                }`}</span>
+                  }`}</span>
                 <span className="textItem">{`About me: ${
                   item.data().aboutMe ? item.data().aboutMe : "Not available"
-                }`}</span>
+                  }`}</span>
               </div>
             </button>
           );
@@ -155,11 +155,11 @@ const Main = props => {
               showToast={props.showToast}
             />
           ) : (
-            <WelcomeBoard
-              currentUserNickname={currentUserNickname}
-              currentUserAvatar={currentUserAvatar}
-            />
-          )}
+              <WelcomeBoard
+                currentUserNickname={currentUserNickname}
+                currentUserAvatar={currentUserAvatar}
+              />
+            )}
         </div>
       </div>
 

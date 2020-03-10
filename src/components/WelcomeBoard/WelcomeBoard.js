@@ -1,21 +1,19 @@
-import React, { Component } from "react";
+import React from "react";
 import "react-toastify/dist/ReactToastify.css";
 import "./WelcomeBoard.scss";
 
-export default class WelcomeBoard extends Component {
-  render() {
-    return (
-      <div className="viewWelcomeBoard">
-        <span className="textTitleWelcome">{`Welcome, ${this.props.currentUserNickname}`}</span>
-        <img
-          className="avatarWelcome"
-          src={this.props.currentUserAvatar}
-          alt="icon avatar"
-        />
-        <span className="textDesciptionWelcome">
-          Let's start talking. Great things might happen.
+const WelcomeBoard = props => (
+  <div className="viewWelcomeBoard">
+    <span className="textTitleWelcome">{`Welcome, ${props.currentUserNickname}`}</span>
+    <img
+      className="avatarWelcome"
+      src={props.currentUserAvatar}
+      alt="icon avatar"
+    />
+    <span className="textDesciptionWelcome">
+      Let's start talking. Great things might happen.
         </span>
-      </div>
-    );
-  }
-}
+  </div>
+);
+
+export default WelcomeBoard;

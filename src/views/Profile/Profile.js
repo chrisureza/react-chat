@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React, { useState, useEffect } from "react";
 import ReactLoading from "react-loading";
 import { withRouter } from "react-router-dom";
 import "react-toastify/dist/ReactToastify.css";
@@ -7,165 +7,159 @@ import images from "../../utils/images";
 import "./Profile.scss";
 import constants from "../../utils/constants";
 
-class Profile extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      isLoading: false,
-      id: localStorage.getItem(constants.ID),
-      nickname: localStorage.getItem(constants.NICKNAME),
-      aboutMe: localStorage.getItem(constants.ABOUT_ME),
-      photoUrl: localStorage.getItem(constants.PHOTO_URL)
-    };
-    this.newAvatar = null;
-    this.newPhotoUrl = "";
-  }
+const Profile = props => {
+  const [isLoading, setIsLoading] = useState(false);
+  const [id] = useState(localStorage.getItem(constants.ID));
+  const [nickname, setNickname] = useState(localStorage.getItem(constants.NICKNAME));
+  const [aboutMe, setAboutMe] = useState(localStorage.getItem(constants.ABOUT_ME));
+  const [photoUrl, setPhotoUrl] = useState(localStorage.getItem(constants.PHOTO_URL));
+  const [newAvatar, setNewAvatar] = useState(null);
+  let refInput = null;
 
-  componentDidMount() {
-    this.checkLogin();
-  }
+  useEffect(() => {
+    checkLogin();
+  });
 
-  checkLogin = () => {
+  const checkLogin = () => {
     if (!localStorage.getItem(constants.ID)) {
-      this.props.history.push("/");
+      props.history.push("/");
     }
   };
 
-  onChangeNickname = event => {
-    this.setState({ nickname: event.target.value });
+  const onChangeNickname = event => {
+    setNickname(event.target.value);
   };
 
-  onChangeAboutMe = event => {
-    this.setState({ aboutMe: event.target.value });
+  const onChangeAboutMe = event => {
+    setAboutMe(event.target.value);
   };
 
-  onChangeAvatar = event => {
-    if (event.target.files && event.target.files[0]) {
+  const onChangeAvatar = event => {
+    const targetFiles = event.target.files;
+    if (targetFiles && targetFiles[0]) {
       // Check this file is an image?
-      const prefixFiletype = event.target.files[0].type.toString();
+      const prefixFiletype = targetFiles[0].type.toString();
       if (prefixFiletype.indexOf(constants.PREFIX_IMAGE) !== 0) {
-        this.props.showToast(0, "This file is not an image");
+        props.showToast(0, "This file is not an image");
         return;
       }
-      this.newAvatar = event.target.files[0];
-      this.setState({ photoUrl: URL.createObjectURL(event.target.files[0]) });
+      setNewAvatar(targetFiles[0]);
+      setPhotoUrl(URL.createObjectURL(targetFiles[0]));
     } else {
-      this.props.showToast(0, "Something wrong with input file");
+      props.showToast(0, "Something wrong with input file");
     }
   };
 
-  uploadAvatar = () => {
-    this.setState({ isLoading: true });
-    if (this.newAvatar) {
+  const uploadAvatar = () => {
+    setIsLoading(true);
+    if (newAvatar) {
       const uploadTask = appStorage
         .ref()
-        .child(this.state.id)
-        .put(this.newAvatar);
+        .child(id)
+        .put(newAvatar);
       uploadTask.on(
         constants.UPLOAD_CHANGED,
         null,
         err => {
-          this.props.showToast(0, err.message);
+          props.showToast(0, err.message);
         },
         () => {
           uploadTask.snapshot.ref.getDownloadURL().then(downloadURL => {
-            this.updateUserInfo(true, downloadURL);
+            updateUserInfo(true, downloadURL);
           });
         }
       );
     } else {
-      this.updateUserInfo(false, null);
+      updateUserInfo(false, null);
     }
   };
 
-  updateUserInfo = (isUpdatePhotoUrl, downloadURL) => {
+  const updateUserInfo = (isUpdatePhotoUrl, downloadURL) => {
     let newInfo;
     if (isUpdatePhotoUrl) {
       newInfo = {
-        nickname: this.state.nickname,
-        aboutMe: this.state.aboutMe,
+        nickname,
+        aboutMe,
         photoUrl: downloadURL
       };
     } else {
       newInfo = {
-        nickname: this.state.nickname,
-        aboutMe: this.state.aboutMe
+        nickname,
+        aboutMe,
       };
     }
     appFirestore
       .collection(constants.NODE_USERS)
-      .doc(this.state.id)
+      .doc(id)
       .update(newInfo)
       .then(data => {
-        localStorage.setItem(constants.NICKNAME, this.state.nickname);
-        localStorage.setItem(constants.ABOUT_ME, this.state.aboutMe);
+        localStorage.setItem(constants.NICKNAME, nickname);
+        localStorage.setItem(constants.ABOUT_ME, aboutMe);
         if (isUpdatePhotoUrl) {
           localStorage.setItem(constants.PHOTO_URL, downloadURL);
         }
-        this.setState({ isLoading: false });
-        this.props.showToast(1, "Update info success");
+        setIsLoading(false);
+        props.showToast(1, "Update info success");
       });
   };
 
-  render() {
-    return (
-      <div className="root">
-        <div className="header">
-          <span>PROFILE</span>
-        </div>
+  return (
+    <div className="root">
+      <div className="header">
+        <span>PROFILE</span>
+      </div>
 
-        <img className="avatar" alt="Avatar" src={this.state.photoUrl} />
+      <img className="avatar" alt="Avatar" src={photoUrl} />
 
-        <div className="viewWrapInputFile">
-          <img
-            className="imgInputFile"
-            alt="icon gallery"
-            src={images.ic_input_file}
-            onClick={() => this.refInput.click()}
-          />
-          <input
-            ref={el => {
-              this.refInput = el;
-            }}
-            accept="image/*"
-            className="viewInputFile"
-            type="file"
-            onChange={this.onChangeAvatar}
-          />
-        </div>
-
-        <span className="textLabel">Nickname:</span>
-        <input
-          className="textInput"
-          value={this.state.nickname ? this.state.nickname : ""}
-          placeholder="Your nickname..."
-          onChange={this.onChangeNickname}
+      <div className="viewWrapInputFile">
+        <img
+          className="imgInputFile"
+          alt="icon gallery"
+          src={images.ic_input_file}
+          onClick={() => refInput.click()}
         />
-        <span className="textLabel">About me:</span>
         <input
-          className="textInput"
-          value={this.state.aboutMe ? this.state.aboutMe : ""}
-          placeholder="Tell about yourself..."
-          onChange={this.onChangeAboutMe}
+          ref={el => {
+            refInput = el;
+          }}
+          accept="image/*"
+          className="viewInputFile"
+          type="file"
+          onChange={onChangeAvatar}
         />
+      </div>
 
-        <button className="btnUpdate" onClick={this.uploadAvatar}>
-          UPDATE
+      <span className="textLabel">Nickname:</span>
+      <input
+        className="textInput"
+        value={nickname ? nickname : ""}
+        placeholder="Your nickname..."
+        onChange={onChangeNickname}
+      />
+      <span className="textLabel">About me:</span>
+      <input
+        className="textInput"
+        value={aboutMe ? aboutMe : ""}
+        placeholder="Tell about yourself..."
+        onChange={onChangeAboutMe}
+      />
+
+      <button className="btnUpdate" onClick={uploadAvatar}>
+        UPDATE
         </button>
 
-        {this.state.isLoading ? (
-          <div className="viewLoading">
-            <ReactLoading
-              type={"spin"}
-              color={"#203152"}
-              height={"3%"}
-              width={"3%"}
-            />
-          </div>
-        ) : null}
-      </div>
-    );
-  }
+      {isLoading ? (
+        <div className="viewLoading">
+          <ReactLoading
+            type={"spin"}
+            color={"#203152"}
+            height={"3%"}
+            width={"3%"}
+          />
+        </div>
+      ) : null}
+    </div>
+  );
 }
 
 export default withRouter(Profile);

@@ -1,5 +1,5 @@
 import firebase from "firebase";
-import React, { Component } from "react";
+import React, { useState, useEffect } from "react";
 import ReactLoading from "react-loading";
 import { withRouter } from "react-router-dom";
 import "react-toastify/dist/ReactToastify.css";
@@ -7,36 +7,30 @@ import { appFirebase, appFirestore } from "../../firebase.config";
 import "./Login.scss";
 import constants from "../../utils/constants";
 
-class Login extends Component {
-  constructor(props) {
-    super(props);
-    this.provider = new firebase.auth.GoogleAuthProvider();
-    this.state = {
-      isLoading: true
-    };
-  }
+const Login = (props) => {
+  const [isLoading, setIsLoading] = useState(true);
 
-  componentDidMount() {
-    this.checkLogin();
-  }
+  useEffect(() => {
+    checkLogin();
+  });
 
-  checkLogin = () => {
+  const provider = new firebase.auth.GoogleAuthProvider();
+
+  const checkLogin = () => {
     if (localStorage.getItem(constants.ID)) {
-      this.setState({ isLoading: false }, () => {
-        this.setState({ isLoading: false });
-        this.props.showToast(1, "Login success");
-        this.props.history.push("/main");
-      });
+      setIsLoading(false);
+      props.showToast(1, "Login success");
+      props.history.push("/main");
     } else {
-      this.setState({ isLoading: false });
+      setIsLoading(false);
     }
   };
 
-  onLoginPress = () => {
-    this.setState({ isLoading: true });
+  const onLoginPress = () => {
+    setIsLoading(true);
     appFirebase
       .auth()
-      .signInWithPopup(this.provider)
+      .signInWithPopup(provider)
       .then(async result => {
         let user = result.user;
         if (user) {
@@ -61,10 +55,9 @@ class Login extends Component {
                 localStorage.setItem(constants.ID, user.uid);
                 localStorage.setItem(constants.NICKNAME, user.displayName);
                 localStorage.setItem(constants.PHOTO_URL, user.photoURL);
-                this.setState({ isLoading: false }, () => {
-                  this.props.showToast(1, "Login success");
-                  this.props.history.push("/main");
-                });
+                setIsLoading(false);
+                props.showToast(1, "Login success");
+                props.history.push("/main");
               });
           } else {
             // Write user info to local
@@ -81,42 +74,39 @@ class Login extends Component {
               constants.ABOUT_ME,
               result.docs[0].data().aboutMe
             );
-            this.setState({ isLoading: false }, () => {
-              this.props.showToast(1, "Login success");
-              this.props.history.push("/main");
-            });
+            setIsLoading(false)
+            props.showToast(1, "Login success");
+            props.history.push("/main");
           }
         } else {
-          this.props.showToast(0, "User info not available");
+          props.showToast(0, "User info not available");
         }
       })
       .catch(err => {
-        this.props.showToast(0, err.message);
-        this.setState({ isLoading: false });
+        props.showToast(0, err.message);
+        setIsLoading(false);
       });
   };
 
-  render() {
-    return (
-      <div className="viewRoot">
-        <div className="header">CHAT DEMO</div>
-        <button className="btnLogin" type="submit" onClick={this.onLoginPress}>
-          SIGN IN WITH GOOGLE
+  return (
+    <div className="viewRoot">
+      <div className="header">CHAT DEMO</div>
+      <button className="btnLogin" type="submit" onClick={onLoginPress}>
+        SIGN IN WITH GOOGLE
         </button>
 
-        {this.state.isLoading ? (
-          <div className="viewLoading">
-            <ReactLoading
-              type={"spin"}
-              color={"#203152"}
-              height={"3%"}
-              width={"3%"}
-            />
-          </div>
-        ) : null}
-      </div>
-    );
-  }
+      {isLoading ? (
+        <div className="viewLoading">
+          <ReactLoading
+            type={"spin"}
+            color={"#203152"}
+            height={"3%"}
+            width={"3%"}
+          />
+        </div>
+      ) : null}
+    </div>
+  );
 }
 
 export default withRouter(Login);
