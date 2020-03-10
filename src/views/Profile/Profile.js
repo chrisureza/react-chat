@@ -106,6 +106,7 @@ const Profile = props => {
   return (
     <div className="root">
       <div className="header">
+        <i class="fa fa-chevron-left" onClick={() => props.history.push("/main")}></i>
         <span>PROFILE</span>
       </div>
 
@@ -148,17 +149,19 @@ const Profile = props => {
         UPDATE
         </button>
 
-      {isLoading ? (
-        <div className="viewLoading">
-          <ReactLoading
-            type={"spin"}
-            color={"#203152"}
-            height={"3%"}
-            width={"3%"}
-          />
-        </div>
-      ) : null}
-    </div>
+      {
+        isLoading ? (
+          <div className="viewLoading">
+            <ReactLoading
+              type={"spin"}
+              color={"#203152"}
+              height={"3%"}
+              width={"3%"}
+            />
+          </div>
+        ) : null
+      }
+    </div >
   );
 }
 

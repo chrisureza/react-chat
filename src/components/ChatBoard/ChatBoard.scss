@@ -101,7 +101,7 @@ input::placeholder {
 /* View item message */
 
 .viewItemRight {
-  width: 300px;
+  width: 200px;
   height: auto;
   background-color: #e8e8e8;
   align-self: flex-end;
@@ -120,7 +120,7 @@ input::placeholder {
 }
 
 .viewItemRight2 {
-  width: 300px;
+  width: 200px;
   height: auto;
   background-color: #e8e8e8;
   align-self: flex-end;
@@ -135,7 +135,7 @@ input::placeholder {
 }
 
 .viewItemRight3 {
-  width: 300px;
+  width: 200px;
   height: auto;
   align-self: flex-end;
   margin-right: 20px;
@@ -148,7 +148,7 @@ input::placeholder {
 }
 
 .viewWrapItemLeft {
-  width: 300px;
+  width: 200px;
   text-align: left;
   align-self: flex-start;
   margin-left: 20px;
@@ -157,7 +157,7 @@ input::placeholder {
 }
 
 .viewWrapItemLeft2 {
-  width: 300px;
+  width: 200px;
   align-self: flex-start;
   text-align: left;
   margin-left: 20px;
@@ -168,12 +168,12 @@ input::placeholder {
 .viewWrapItemLeft3 {
   flex-direction: row;
   display: flex;
-  width: 340px;
+  width: 240px;
   margin-bottom: -15px;
 }
 
 .viewItemLeft {
-  width: 300px;
+  width: 200px;
   height: auto;
   background-color: #203152;
   border-top-left-radius: 8px;
@@ -188,7 +188,7 @@ input::placeholder {
 }
 
 .viewItemLeft2 {
-  width: 300px;
+  width: 200px;
   height: auto;
   background-color: #203152;
   border-top-left-radius: 8px;
@@ -199,7 +199,7 @@ input::placeholder {
 }
 
 .viewItemLeft3 {
-  width: 300px;
+  width: 200px;
   height: auto;
   border-top-left-radius: 8px;
   border-top-right-radius: 8px;
@@ -237,8 +237,8 @@ input::placeholder {
 
 .imgItemRight {
   object-fit: cover;
-  width: 300px;
-  height: 300px;
+  width: 200px;
+  height: 200px;
   border-top-left-radius: 8px;
   border-top-right-radius: 8px;
   border-bottom-left-radius: 8px;
@@ -247,8 +247,8 @@ input::placeholder {
 
 .imgItemLeft {
   object-fit: cover;
-  width: 300px;
-  height: 300px;
+  width: 200px;
+  height: 200px;
   border-top-left-radius: 8px;
   border-top-right-radius: 8px;
   border-bottom-left-radius: 0px;

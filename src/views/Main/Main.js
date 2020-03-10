@@ -7,11 +7,15 @@ import WelcomeBoard from "../../components/WelcomeBoard/WelcomeBoard";
 import "./Main.scss";
 import ChatBoard from "../../components/ChatBoard/ChatBoard";
 import constants from "../../utils/constants";
+import { faComments } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+
 
 const Main = props => {
   const [isLoading, setIsLoading] = useState(true);
   const [isLogoutDialogOpen, setIsLogoutDialogOpen] = useState(false);
   const [currentPeerUser, setCurrentPeerUser] = useState(null);
+  const [isChatsViewOpen, setIsChatsViewOpen] = useState(false);
   let listUser = useRef([]);;
 
   useEffect(() => {
@@ -30,6 +34,10 @@ const Main = props => {
       getListUser();
     }
   };
+
+  const toogleChatsView = () => {
+    setIsChatsViewOpen(!isChatsViewOpen)
+  }
 
   const getListUser = async () => {
     const result = await appFirestore.collection(constants.NODE_USERS).get();
@@ -83,6 +91,7 @@ const Main = props => {
               }
               onClick={() => {
                 setCurrentPeerUser(item.data());
+                setIsChatsViewOpen(false);
               }}
             >
               <img
@@ -130,27 +139,20 @@ const Main = props => {
     <div className="root">
       {/* Header */}
       <div className="header">
+        <i class="fa fa-comments" onClick={toogleChatsView}></i>
         <span>MAIN</span>
-        <img
-          className="icProfile"
-          alt="An icon default avatar"
-          src={images.ic_default_avatar}
-          onClick={onProfileClick}
-        />
-        <img
-          className="icLogout"
-          alt="An icon logout"
-          src={images.ic_logout}
-          onClick={onLogoutClick}
-        />
+        <i class="fa fa-user-circle" onClick={onProfileClick}></i>
+        <i class="fa fa-sign-out" onClick={onLogoutClick}></i>
+
       </div>
 
       {/* Body */}
       <div className="body">
-        <div className="viewListUser"> {renderListUser()}</div>
+        <div className={`${isChatsViewOpen ? 'viewListUser show' : 'viewListUser'}`}> {renderListUser()}</div>
         <div className="viewBoard">
           {currentPeerUser ? (
             <ChatBoard
+              isChatsViewOpen={isChatsViewOpen}
               currentPeerUser={currentPeerUser}
               showToast={props.showToast}
             />

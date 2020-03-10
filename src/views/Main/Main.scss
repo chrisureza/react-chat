@@ -122,10 +122,17 @@
 /* List user */
 
 .viewListUser {
-  overflow-y: scroll;
-  max-height: 90vh;
-  padding-top: 10px;
-  padding-bottom: 10px;
+  position: fixed;
+  top: 64px;
+  left: 100%;
+  height: calc(100% - 63px);
+  background: red;
+  overflow-y: auto;
+  z-index: 1;
+
+  &.show {
+    left: 0;
+  }
 }
 
 .viewListUser::-webkit-scrollbar-track {
@@ -194,5 +201,7 @@
 .viewBoard {
   display: flex;
   flex: 1;
-  max-height: 90vh;
+  position: absolute;
+  width: 100%;
+  height: calc(100% - 63px);
 }

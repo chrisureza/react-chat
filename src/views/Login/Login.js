@@ -90,7 +90,7 @@ const Login = (props) => {
 
   return (
     <div className="viewRoot">
-      <div className="header">CHAT DEMO</div>
+      <div className="header">REACT CHAT DEMO</div>
       <button className="btnLogin" type="submit" onClick={onLoginPress}>
         SIGN IN WITH GOOGLE
         </button>

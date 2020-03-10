@@ -28,7 +28,8 @@
   height: 120px;
   border-radius: 60px;
   align-self: center;
-  margin-top: 50px;
+  margin-top: 24px;
+  margin-bottom: 24px;
   object-fit: cover;
 }
 
@@ -37,12 +38,11 @@
   color: #203152;
   font-style: italic;
   font-size: 18px;
-  margin-top: 50px;
-  margin-left: -400px;
+  margin-top: 24px;
 }
 
 .textInput {
-  width: 500px;
+  width: 260px;
   align-self: center;
   border: none;
   background-color: #203152;
@@ -71,14 +71,14 @@ input::placeholder {
   align-self: center;
   border-radius: 8px;
   font-weight: bold;
-  margin-top: 100px;
+  margin-top: 40px;
   cursor: pointer;
 }
 
 .viewWrapInputFile {
   position: absolute;
   align-self: center;
-  top: 215px;
+  top: 190px;
   background-color: rgba(1, 1, 1, 0.5);
   width: 40px;
   height: 40px;
