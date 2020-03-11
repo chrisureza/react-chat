@@ -104,7 +104,7 @@ const Profile = props => {
   };
 
   return (
-    <div className="root">
+    <div className="profile-root">
       <div className="header">
         <div className="left-section">
           <i className="fa fa-chevron-left" onClick={() => props.history.push("/main")}></i>        </div>

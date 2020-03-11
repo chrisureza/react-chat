@@ -132,7 +132,7 @@ const Main = props => {
   };
 
   return (
-    <div className="root">
+    <div className="main-root">
       {/* Header */}
       <div className="header">
         <div className="left-section">

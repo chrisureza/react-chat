@@ -1,245 +1,246 @@
-.root {
+.main-root {
   text-align: center;
   flex-direction: column;
   display: flex;
-}
 
-.header {
-  font-weight: bold;
-  font-size: 20px;
-  color: #203152;
-  background-color: #f5a623;
-  padding: 20px;
-  box-shadow: 0 4px 4px #808888;
-  flex-direction: row;
-  display: flex;
 
-  .left-section {
-    width: 30%;
+  .header {
+    font-weight: bold;
+    font-size: 20px;
+    color: #203152;
+    background-color: #f5a623;
+    padding: 20px;
+    box-shadow: 0 4px 4px #808888;
+    flex-direction: row;
     display: flex;
-    align-items: center;
-    justify-content: flex-start;
 
-    span {
-      font-size: 30px;
-      position: absolute;
-    }
-  }
-
-  .title-section {
-    width: 40%;
-  }
-
-  .right-section {
-    width: 30%;
-
-    display: flex;
-    align-items: center;
-    justify-content: flex-end;
-
-    .btns-container {
-      position: absolute;
-      font-size: 28px;
+    .left-section {
+      width: 30%;
+      display: flex;
+      align-items: center;
+      justify-content: flex-start;
 
       span {
-        margin-left: 24px;
+        font-size: 30px;
+        position: absolute;
+      }
+    }
 
+    .title-section {
+      width: 40%;
+    }
+
+    .right-section {
+      width: 30%;
+
+      display: flex;
+      align-items: center;
+      justify-content: flex-end;
+
+      .btns-container {
+        position: absolute;
+        font-size: 28px;
+
+        span {
+          margin-left: 24px;
+
+        }
       }
     }
   }
-}
 
-.body {
-  display: flex;
-  flex-direction: row;
-  padding-top: 5px;
-}
-
-.viewLoading {
-  position: absolute;
-  top: 0;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  background-color: rgba(255, 255, 255, 0.5);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.icLogout {
-  width: 25px;
-  height: 25px;
-  position: absolute;
-  right: 0;
-  margin-right: 30px;
-  cursor: pointer;
-}
-
-.icProfile {
-  width: 25px;
-  height: 25px;
-  position: absolute;
-  right: 0;
-  margin-right: 80px;
-  cursor: pointer;
-}
-
-/* Dialog confirm */
-
-.viewCoverScreen {
-  position: absolute;
-  top: 0;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  background-color: rgba(0, 0, 0, 0.5);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.viewWrapTextLogoutDialog {
-  width: 300px;
-  height: 50px;
-  background-color: #f5a623;
-  border-top-left-radius: 8px;
-  border-top-right-radius: 8px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.titleLogoutDialog {
-  color: white;
-  font-weight: bold;
-  font-size: 18px;
-}
-
-.viewWrapButtonLogoutDialog {
-  flex-direction: row;
-  height: 100px;
-  width: 300px;
-  min-width: 300px;
-  background-color: white;
-  border-bottom-left-radius: 8px;
-  border-bottom-right-radius: 8px;
-  align-items: center;
-  justify-content: center;
-  display: flex;
-}
-
-.btnYes {
-  width: 100px;
-  height: 40px;
-  font-weight: bold;
-  margin-right: 20px;
-  background-color: #203152;
-  border: 0px;
-  color: white;
-  border-radius: 4px;
-  cursor: pointer;
-}
-
-.btnNo {
-  width: 100px;
-  height: 40px;
-  font-weight: bold;
-  margin-left: 20px;
-  padding: 5px;
-  background-color: #dd4b39;
-  border: 0px;
-  color: white;
-  border-radius: 4px;
-  cursor: pointer;
-}
-
-/* List user */
-
-.viewListUser {
-  position: fixed;
-  top: 64px;
-  left: -328px;
-  height: calc(100% - 63px);
-  box-shadow: 0px 2px 8px #808888;
-  background: white;
-  overflow-y: auto;
-  z-index: 1;
-  transition: left 500ms;
-  width: 320px;
-
-  &.show {
-    left: 0;
+  .body {
+    display: flex;
+    flex-direction: row;
+    padding-top: 5px;
   }
-}
 
-.viewListUser::-webkit-scrollbar-track {
-  padding: 2px 0;
-  background-color: #e8e8e8;
-}
+  .viewLoading {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background-color: rgba(255, 255, 255, 0.5);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
 
-.viewListUser::-webkit-scrollbar {
-  width: 6px;
-}
+  .icLogout {
+    width: 25px;
+    height: 25px;
+    position: absolute;
+    right: 0;
+    margin-right: 30px;
+    cursor: pointer;
+  }
 
-.viewListUser::-webkit-scrollbar-thumb {
-  border-radius: 10px;
-  box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
-  background-color: #203152;
-}
+  .icProfile {
+    width: 25px;
+    height: 25px;
+    position: absolute;
+    right: 0;
+    margin-right: 80px;
+    cursor: pointer;
+  }
 
-.viewWrapItem {
-  border: none;
-  display: flex;
-  flex-direction: row;
-  background-color: #ffffff;
-  width: 320px;
-  padding: 10px;
-  align-items: center;
-  justify-content: center;
-}
+  /* Dialog confirm */
 
-.viewWrapItemFocused {
-  border: none;
-  display: flex;
-  flex-direction: row;
-  background-color: #e8e8e8;
-  width: 320px;
-  padding: 10px;
-  align-items: center;
-  justify-content: center;
-}
+  .viewCoverScreen {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
 
-.viewAvatarItem {
-  width: 50px;
-  height: 50px;
-  border-radius: 25px;
-  object-fit: cover;
-}
+  .viewWrapTextLogoutDialog {
+    width: 300px;
+    height: 50px;
+    background-color: #f5a623;
+    border-top-left-radius: 8px;
+    border-top-right-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
 
-.viewWrapContentItem {
-  flex-direction: column;
-  display: flex;
-  flex: 1;
-  margin-left: 15px;
-  color: #203152;
-  word-wrap: break-word;
-}
+  .titleLogoutDialog {
+    color: white;
+    font-weight: bold;
+    font-size: 18px;
+  }
 
-.textItem {
-  display: block;
-  overflow: hidden;
-  white-space: nowrap;
-  text-overflow: ellipsis;
-  width: 240px;
-  text-align: left;
-  font-size: 14px;
-}
+  .viewWrapButtonLogoutDialog {
+    flex-direction: row;
+    height: 100px;
+    width: 300px;
+    min-width: 300px;
+    background-color: white;
+    border-bottom-left-radius: 8px;
+    border-bottom-right-radius: 8px;
+    align-items: center;
+    justify-content: center;
+    display: flex;
+  }
 
-.viewBoard {
-  display: flex;
-  flex: 1;
-  position: absolute;
-  width: 100%;
-  height: calc(100% - 63px);
+  .btnYes {
+    width: 100px;
+    height: 40px;
+    font-weight: bold;
+    margin-right: 20px;
+    background-color: #203152;
+    border: 0px;
+    color: white;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+
+  .btnNo {
+    width: 100px;
+    height: 40px;
+    font-weight: bold;
+    margin-left: 20px;
+    padding: 5px;
+    background-color: #dd4b39;
+    border: 0px;
+    color: white;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+
+  /* List user */
+
+  .viewListUser {
+    position: fixed;
+    top: 64px;
+    left: -328px;
+    height: calc(100% - 63px);
+    box-shadow: 0px 2px 8px #808888;
+    background: white;
+    overflow-y: auto;
+    z-index: 1;
+    transition: left 500ms;
+    width: 320px;
+
+    &.show {
+      left: 0;
+    }
+  }
+
+  .viewListUser::-webkit-scrollbar-track {
+    padding: 2px 0;
+    background-color: #e8e8e8;
+  }
+
+  .viewListUser::-webkit-scrollbar {
+    width: 6px;
+  }
+
+  .viewListUser::-webkit-scrollbar-thumb {
+    border-radius: 10px;
+    box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+    background-color: #203152;
+  }
+
+  .viewWrapItem {
+    border: none;
+    display: flex;
+    flex-direction: row;
+    background-color: #ffffff;
+    width: 320px;
+    padding: 10px;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .viewWrapItemFocused {
+    border: none;
+    display: flex;
+    flex-direction: row;
+    background-color: #e8e8e8;
+    width: 320px;
+    padding: 10px;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .viewAvatarItem {
+    width: 50px;
+    height: 50px;
+    border-radius: 25px;
+    object-fit: cover;
+  }
+
+  .viewWrapContentItem {
+    flex-direction: column;
+    display: flex;
+    flex: 1;
+    margin-left: 15px;
+    color: #203152;
+    word-wrap: break-word;
+  }
+
+  .textItem {
+    display: block;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    width: 240px;
+    text-align: left;
+    font-size: 14px;
+  }
+
+  .viewBoard {
+    display: flex;
+    flex: 1;
+    position: absolute;
+    width: 100%;
+    height: calc(100% - 63px);
+  }
 }
