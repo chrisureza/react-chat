@@ -106,8 +106,14 @@ const Profile = props => {
   return (
     <div className="root">
       <div className="header">
-        <i class="fa fa-chevron-left" onClick={() => props.history.push("/main")}></i>
-        <span>PROFILE</span>
+        <div className="left-section">
+          <i className="fa fa-chevron-left" onClick={() => props.history.push("/main")}></i>        </div>
+        <div className="title-section">
+          <span>PROFILE</span>
+        </div>
+        <div className="right-section">
+        </div>
+
       </div>
 
       <img className="avatar" alt="Avatar" src={photoUrl} />
