@@ -6,6 +6,7 @@ import { appFirestore, appStorage } from "../../firebase.config";
 import images from "../../utils/images";
 import "./Profile.scss";
 import constants from "../../utils/constants";
+import Header from '../../components/Header/Header';
 
 const Profile = props => {
   const [isLoading, setIsLoading] = useState(false);
@@ -105,68 +106,61 @@ const Profile = props => {
 
   return (
     <div className="profile-root">
-      <div className="header">
-        <div className="left-section">
-          <i className="fa fa-chevron-left" onClick={() => props.history.push("/main")}></i>        </div>
-        <div className="title-section">
-          <span>PROFILE</span>
+      <Header
+        title="PROFILE"
+        goBack={() => props.history.push("/main")}
+      />
+      <div className="main-content">
+        <img className="avatar" alt="Avatar" src={photoUrl} />
+        <div className="viewWrapInputFile">
+          <img
+            className="imgInputFile"
+            alt="icon gallery"
+            src={images.ic_input_file}
+            onClick={() => refInput.click()}
+          />
+          <input
+            ref={el => {
+              refInput = el;
+            }}
+            accept="image/*"
+            className="viewInputFile"
+            type="file"
+            onChange={onChangeAvatar}
+          />
         </div>
-        <div className="right-section">
-        </div>
-
-      </div>
-
-      <img className="avatar" alt="Avatar" src={photoUrl} />
-
-      <div className="viewWrapInputFile">
-        <img
-          className="imgInputFile"
-          alt="icon gallery"
-          src={images.ic_input_file}
-          onClick={() => refInput.click()}
-        />
+        <span className="textLabel">Nickname:</span>
         <input
-          ref={el => {
-            refInput = el;
-          }}
-          accept="image/*"
-          className="viewInputFile"
-          type="file"
-          onChange={onChangeAvatar}
+          className="textInput"
+          value={nickname ? nickname : ""}
+          placeholder="Your nickname..."
+          onChange={onChangeNickname}
         />
-      </div>
+        <span className="textLabel">About me:</span>
+        <input
+          className="textInput"
+          value={aboutMe ? aboutMe : ""}
+          placeholder="Tell about yourself..."
+          onChange={onChangeAboutMe}
+        />
 
-      <span className="textLabel">Nickname:</span>
-      <input
-        className="textInput"
-        value={nickname ? nickname : ""}
-        placeholder="Your nickname..."
-        onChange={onChangeNickname}
-      />
-      <span className="textLabel">About me:</span>
-      <input
-        className="textInput"
-        value={aboutMe ? aboutMe : ""}
-        placeholder="Tell about yourself..."
-        onChange={onChangeAboutMe}
-      />
-
-      <button className="btnUpdate" onClick={uploadAvatar}>
-        UPDATE
+        <button className="btnUpdate" onClick={uploadAvatar}>
+          UPDATE
         </button>
 
-      {
-        isLoading ? (
-          <div className="viewLoading">
-            <ReactLoading
-              type={"spin"}
-              color={"#203152"}
-              height={"3%"}
-              width={"3%"}
-            />
-          </div>
-        ) : null
-      }
+        {
+          isLoading ? (
+            <div className="viewLoading">
+              <ReactLoading
+                type={"spin"}
+                color={"#203152"}
+                height={"3%"}
+                width={"3%"}
+              />
+            </div>
+          ) : null
+        }
+      </div>
     </div >
   );
 }

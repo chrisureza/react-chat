@@ -3,52 +3,6 @@
   flex-direction: column;
   display: flex;
 
-
-  .header {
-    font-weight: bold;
-    font-size: 20px;
-    color: #203152;
-    background-color: #f5a623;
-    padding: 20px;
-    box-shadow: 0 4px 4px #808888;
-    flex-direction: row;
-    display: flex;
-
-    .left-section {
-      width: 30%;
-      display: flex;
-      align-items: center;
-      justify-content: flex-start;
-
-      span {
-        font-size: 30px;
-        position: absolute;
-      }
-    }
-
-    .title-section {
-      width: 40%;
-    }
-
-    .right-section {
-      width: 30%;
-
-      display: flex;
-      align-items: center;
-      justify-content: flex-end;
-
-      .btns-container {
-        position: absolute;
-        font-size: 28px;
-
-        span {
-          margin-left: 24px;
-
-        }
-      }
-    }
-  }
-
   .body {
     display: flex;
     flex-direction: row;

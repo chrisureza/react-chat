@@ -6,6 +6,7 @@ import WelcomeBoard from "../../components/WelcomeBoard/WelcomeBoard";
 import "./Main.scss";
 import ChatBoard from "../../components/ChatBoard/ChatBoard";
 import constants from "../../utils/constants";
+import Header from '../../components/Header/Header';
 
 const Main = props => {
   const [isLoading, setIsLoading] = useState(true);
@@ -134,21 +135,12 @@ const Main = props => {
   return (
     <div className="main-root">
       {/* Header */}
-      <div className="header">
-        <div className="left-section">
-          <span className="fa fa-comments" onClick={toogleChatsView}></span>
-        </div>
-        <div className="title-section">
-          <span>MAIN</span>
-        </div>
-        <div className="right-section">
-          <div className="btns-container">
-            <span className="fa fa-user-circle" onClick={onProfileClick}></span>
-            <span className="fa fa-sign-out" onClick={onLogoutClick}></span>
-          </div>
-        </div>
-      </div>
-
+      <Header
+        title="MAIN"
+        toogleChatsView={toogleChatsView}
+        onProfileClick={onProfileClick}
+        onLogoutClick={onLogoutClick}
+      />
       {/* Body */}
       <div className="body">
         <div className={`${isChatsViewOpen ? 'viewListUser show' : 'viewListUser'}`}> {renderListUser()}</div>

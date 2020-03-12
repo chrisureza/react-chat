@@ -2,11 +2,12 @@ import firebase from "firebase";
 import React, { useState, useEffect } from "react";
 import ReactLoading from "react-loading";
 import { withRouter } from "react-router-dom";
-import "react-toastify/dist/ReactToastify.css";
 import { appFirebase, appFirestore } from "../../firebase.config";
+import "react-toastify/dist/ReactToastify.css";
 import "./Login.scss";
 import constants from "../../utils/constants";
 import images from "../../utils/images";
+import Header from '../../components/Header/Header';
 
 const Login = (props) => {
   const [isLoading, setIsLoading] = useState(true);
@@ -154,7 +155,9 @@ const Login = (props) => {
 
   return (
     <div className="login-viewRoot">
-      <div className="header">REACT CHAT DEMO</div>
+      <Header
+        title="REACT CHAT DEMO"
+      />
       <div className="login-btns-containers">
         <button className="btnLogin btnLogin--anonymously" type="submit" onClick={onAnonymouslyLoginPress}>
           SIGN IN ANONYMOUSLY
